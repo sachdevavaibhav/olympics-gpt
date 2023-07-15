@@ -5,30 +5,43 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export const loadPdf = async (path, splitPages=true) => {
-    const loader = new PDFLoader(path, splitPages); 
-    const docs = await loader.load();
-    return docs
+    try {
+        const loader = new PDFLoader(path, splitPages); 
+        const docs = await loader.load();
+        return docs        
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export const splitDocs = async (docs, chunkSize=1000, chunkOverlap=200) => {
-    const splitter = new RecursiveCharacterTextSplitter(
-        {
-            chunkSize: chunkSize,
-            chunkOverlap: chunkOverlap
-        }
-    );
-    const docChunks = await splitter.splitDocuments(docs);
-    return docChunks
+    try {
+        const splitter = new RecursiveCharacterTextSplitter(
+            {
+                chunkSize: chunkSize,
+                chunkOverlap: chunkOverlap
+            }
+        );
+        const docChunks = await splitter.splitDocuments(docs);
+        return docChunks
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 // Initialise Pincone Client
 export const initialisePineconeClient = async () => {
-    const pineconeClient = new PineconeClient();
-    await pineconeClient.init({
-        apiKey: process.env.PINECONE_API_KEY,
-        environment: process.env.PINECONE_ENVIRONMENT
-    })
-    return pineconeClient
+    try {
+        const pineconeClient = new PineconeClient();
+        await pineconeClient.init({
+            apiKey: process.env.PINECONE_API_KEY,
+            environment: process.env.PINECONE_ENVIRONMENT
+        })
+        return pineconeClient
+    }
+    catch (error) {
+        console.error(error)
+    }
 }
 
 
