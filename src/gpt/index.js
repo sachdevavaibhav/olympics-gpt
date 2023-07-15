@@ -1,9 +1,11 @@
 import { loadPdf, splitDocs,initialisePineconeClient } from "./pinecone/pinecone.js";
+import { queryModel } from "./pinecone/query.js";
 
 export {loadPdf};
 export {splitDocs};
 export {initialisePineconeClient};
 
+export {queryModel};
 
 
 

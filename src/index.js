@@ -1,23 +1,26 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { generateResponse } from './utils/generateResponse.js'
-// import { OpenAI } from "langchain/llms/openai";
+import { initialisePineconeClient } from './gpt/index.js'
+import { queryModel } from './gpt/index.js'
 dotenv.config()
 
 const app = express()
 
 const PORT = process.env.PORT || 5000
 
+app.use(express.json())
+
+const pineconeClient = await initialisePineconeClient();
+
 app.get('/healthcheck', (req, res) => {
     res.status(200).json(generateResponse(req, res, { message: 'Server is running' }))
 })
 
-app.get('/', async (req, res) => {
-    // const model = new OpenAI({ openAIApiKey: process.env.OPENAI_API_KEY, temperature: 0.9 });
-    // const response = await model.call(
-    //     "What would be a good company name a company that makes colorful socks?"
-    //   );
-    res.status(200).json(generateResponse(req, res, { message: "Hello World!" }))
+app.post('/query', async (req, res) => {
+    const {query} = req.body; 
+    const queryRes = await queryModel(query, pineconeClient)
+    res.status(200).json(generateResponse(req, res, { queryRes }))
 })
 
 app.listen(PORT, () => {
