@@ -1,11 +1,12 @@
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from "langchain/llms/openai";
-import { VectorDBQAChain } from "langchain/chains";
+import { ConversationalRetrievalQAChain } from "langchain/chains";
+import { BufferMemory } from "langchain/memory";
 import dotenv from "dotenv";
 dotenv.config();
 
-export const queryModel = async (query, pineconeClient, k=1, returnSourceDocs=false) => {
+export const createQueryChain = async (pineconeClient, k=1, returnSourceDocs=false) => {
     const pineconeIndex = pineconeClient.Index(process.env.PINECONE_INDEX);
     
     const vectorStore = await PineconeStore.fromExistingIndex(
@@ -14,16 +15,26 @@ export const queryModel = async (query, pineconeClient, k=1, returnSourceDocs=fa
     );
     
     /* Search the vector DB independently with meta filters */
-    const results = await vectorStore.similaritySearch(query, k);
-    console.log("similaritySearch:", results);
+    // const results = await vectorStore.similaritySearch(query, k);
     
     /* Use as part of a chain (currently no metadata filters) */
-    const model = new OpenAI();
-    const chain = VectorDBQAChain.fromLLM(model, vectorStore, {
-      k: k,
-      returnSourceDocuments: returnSourceDocs,
+    const model = new OpenAI({
+      modelName: "gpt-3.5-turbo",
+      temperature: 0.2,
     });
-    const response = await chain.call({ query: query });
+    console.log(model.modelName)
+    const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), {
+      memory: new BufferMemory({
+        memoryKey: "chat_history", // Must be set to "chat_history"
+        k,
+        returnSourceDocs,
+      }),
+    });
+    return chain;
+}
+
+export const queryModel = async (chain, query) => {
+    const response = await chain.call({ question: query });
     console.log(response);
-    return response;
+    return chain;
 }
