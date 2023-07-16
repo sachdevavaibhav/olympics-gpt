@@ -3,7 +3,7 @@ import Chat from "./components/chat/chat.component"
 
 const App = () => {
   return (
-    <Box bgColor="#0E1525" color="#fff" h="100vh">
+    <Box bgColor="#152136" color="#fff" h="100vh">
       <Chat />
     </Box>
   )
