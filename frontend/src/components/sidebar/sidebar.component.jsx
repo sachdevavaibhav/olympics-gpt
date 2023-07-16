@@ -24,7 +24,7 @@ import {
   import { FiMenu } from 'react-icons/fi';
   import { RiFlashlightFill } from 'react-icons/ri';
   
-  export default function Index() {
+    const SideBar = () => {
     const { isOpen, onClose, onOpen } = useDisclosure();
   
     return (
@@ -151,3 +151,5 @@ import {
       </Flex>
     );
   };
+
+export default SideBar;

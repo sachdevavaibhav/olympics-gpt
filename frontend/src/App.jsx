@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react"
-import Chat from "./components/chat/chat.component"
+import ChatPage from "./pages/chatPage/chatPage.page"
 
 const App = () => {
   return (
     <Box bgColor="#152136" color="#fff" h="100vh">
-      <Chat />
+      <ChatPage />
     </Box>
   )
 }

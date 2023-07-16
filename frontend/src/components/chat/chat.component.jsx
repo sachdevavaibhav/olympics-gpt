@@ -1,7 +1,6 @@
 import ChatExample from "./example.component";
 import Message from "../message/message.component";
 import { Flex, Box } from "@chakra-ui/react";
-import Index from "../sidebar/sidebar.component";
 
 let chats = [
     [
@@ -18,7 +17,6 @@ let chats = [
 const Chat = () => {
     return(
         <>
-        <Index />
         <Flex justify="center" align="center" flexDirection="column">
             {
                 chats.length <= 0 ? <ChatExample /> : chats.map((chat, index) => {
