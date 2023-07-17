@@ -32,16 +32,3 @@ const Chat = () => {
 }
 
 export default Chat;
-
-/*
-    [
-        [
-            {role: "user", text: "Hello"},
-            {role: "system", text: "Hello! How can I help you today?"},
-        ],
-        [
-            {role: "user", text: "Hello"},
-            {role: "system", text: "Hello! How can I help you today?"},
-        ],
-    ]
-*/

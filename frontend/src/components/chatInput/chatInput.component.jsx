@@ -1,8 +1,9 @@
-import { Flex, Input, InputGroup, InputRightElement, Button, Spinner } from "@chakra-ui/react";
+import { Flex, Input, InputGroup, InputRightElement, Button, Spinner, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage, getMessageResponse } from "../../store/chat/chat.reducer";
 import { selectChatIsLoading } from "../../store/chat/chat.selector";
+import sendIcon from "../../assets/send.svg"
 
 const ChatInput = () => {
 
@@ -13,6 +14,7 @@ const ChatInput = () => {
     const handleChange = (event) => setQuery(event.target.value)
 
     const handleSubmit = async (e) => {
+        if (query === '') return
         e.preventDefault()
         dispatch(addMessage({role: "user", text: query}))
         const response = dispatch(getMessageResponse(query))
@@ -30,9 +32,16 @@ const ChatInput = () => {
                     value={query}
                 />
                 <InputRightElement width='4.5rem'>
-                    {isLoading ? <Spinner /> : 
-                        <Button h='1.75rem' size='sm' type="submit" onClick={handleSubmit}>
-                            Send
+                    {
+                        <Button 
+                        h='1.75rem' 
+                        size='sm' 
+                        type="submit" 
+                        onClick={handleSubmit}
+                        isLoading={isLoading}
+                        spinner={<Spinner/>}
+                        >
+                            <Image src={sendIcon}/>
                         </Button>
                     }
                 </InputRightElement>
