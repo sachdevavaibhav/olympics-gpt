@@ -8,10 +8,10 @@ message: {
 */
 const Message = ({message, role}) => {
     return (
-        <Flex alignItems="center" mb="3" w="100%" justify="center" bgColor={role=="system"?"#1D283D":"inherit"} py="3">
+        <Flex alignItems="center" mb="3" w="100%" justify="center" bgColor={role=="assistant"?"#1D283D":"inherit"} py="3">
             <Wrap mr="5" alignSelf="start">
                 <WrapItem>
-                    <Avatar name={role==="system"?"Bot":"Vaibhav Sachdeva"}/>
+                    <Avatar name={role==="assistant"?"Bot":"Vaibhav Sachdeva"}/>
                 </WrapItem>
             </Wrap>
             <Box w="40%">
