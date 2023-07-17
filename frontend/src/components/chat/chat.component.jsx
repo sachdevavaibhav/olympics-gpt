@@ -2,7 +2,7 @@ import ChatExample from "./example.component";
 import Message from "../message/message.component";
 import { Flex, Box } from "@chakra-ui/react";
 import {useSelector} from "react-redux";
-import { selectChat } from "../../store/chat/chat.selector";
+import { selectChatMessages } from "../../store/chat/chat.selector";
 
 // let chats = [
 //     {role: "user", text: "Hello"},
@@ -12,13 +12,13 @@ import { selectChat } from "../../store/chat/chat.selector";
 // ]
 
 const Chat = () => {
-    const chats = useSelector(selectChat);
-    console.log("chats",chats);
+    const messages = useSelector(selectChatMessages);
+    console.log("messages",messages);
     return(
         <>
         <Flex justify="center" align="center" flexDirection="column">
             {
-                chats.length <= 0 ? <ChatExample /> : chats.map((message, index) => {
+                messages.length <= 0 ? <ChatExample /> : messages.map((message, index) => {
                     return(
                         <Box w="100%" key={index}>
                             <Message key={index} message={message.text} role={message.role} />

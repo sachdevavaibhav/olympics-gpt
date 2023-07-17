@@ -1,25 +1,23 @@
-import { Flex, Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import { Flex, Input, InputGroup, InputRightElement, Button, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addMessage } from "../../store/chat/chat.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage, getMessageResponse } from "../../store/chat/chat.reducer";
+import { selectChatIsLoading } from "../../store/chat/chat.selector";
 
 const ChatInput = () => {
+
     const [query, setQuery] = useState('')
+    const isLoading = useSelector(selectChatIsLoading)
     const dispatch = useDispatch()
+
     const handleChange = (event) => setQuery(event.target.value)
+
     const handleSubmit = async (e) => {
-        console.log(query)
         e.preventDefault()
         dispatch(addMessage({role: "user", text: query}))
-        const response = await fetch('http://localhost:5000/query', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({query})
-        })
-        const data = await response.json()
-        dispatch(addMessage(data.response.queryRes))
+        const response = dispatch(getMessageResponse(query))
+        if (response.chat) dispatch(addMessage(response))
+        setQuery('')
     }
     return (
         <Flex justify="center" mt="5" pos="fixed" bottom="10" left="0" right="0">
@@ -29,11 +27,14 @@ const ChatInput = () => {
                     type='text'
                     placeholder='Ask me anything about Olympics'
                     onChange={handleChange}
+                    value={query}
                 />
                 <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' type="submit" onClick={handleSubmit}>
-                        Send
-                    </Button>
+                    {isLoading ? <Spinner /> : 
+                        <Button h='1.75rem' size='sm' type="submit" onClick={handleSubmit}>
+                            Send
+                        </Button>
+                    }
                 </InputRightElement>
             </InputGroup>
         </Flex>
