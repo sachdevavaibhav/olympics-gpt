@@ -36,5 +36,5 @@ export const createQueryChain = async (pineconeClient, k=1, returnSourceDocs=fal
 export const queryModel = async (chain, query) => {
     const response = await chain.call({ question: query });
     console.log(response);
-    return chain;
+    return {role:"assistant", text: response.text};
 }
