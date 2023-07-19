@@ -17,12 +17,11 @@ const ChatInput = () => {
         if (query === '') return
         e.preventDefault()
         dispatch(addMessage({role: "user", text: query}))
-        const response = dispatch(getMessageResponse(query))
-        if (response.chat) dispatch(addMessage(response))
+        dispatch(getMessageResponse(query))
         setQuery('')
     }
     return (
-        <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="5" w="full" mb="5" >
+        <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="" w="full" pb="2">
             <InputGroup w="50%">
                 <Input
                     p='1.8rem'
@@ -35,6 +34,7 @@ const ChatInput = () => {
                     focusBorderColor="#0E1525"
                     borderColor="#0E1525"
                     _hover={{borderColor: "#0E1525"}}
+                    isDisabled={isLoading}
                 />
                 <InputRightElement width='5rem' height="100%">
                         <Button 
@@ -43,9 +43,10 @@ const ChatInput = () => {
                         type="submit" 
                         onClick={handleSubmit}
                         isLoading={isLoading}
-                        spinner={<Spinner/>}
+                        spinner={<Spinner color="white"/>}
                         bgColor="#0E1525"
                         _hover={{bgColor: "#0E1525"}}
+                        isDisabled={isLoading}
                         >
                             <Image src={sendIcon} w="2.3rem"/>
                         </Button>
