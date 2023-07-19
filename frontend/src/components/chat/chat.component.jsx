@@ -1,8 +1,9 @@
+import { useEffect, useRef } from "react";
 import ChatExample from "./example.component";
 import Message from "../message/message.component";
 import { Flex, Box } from "@chakra-ui/react";
 import {useSelector} from "react-redux";
-import { selectChatMessages } from "../../store/chat/chat.selector";
+import { selectChatMessages, selectChatIsLoading } from "../../store/chat/chat.selector";
 
 // let messages = [
 //     {role: "user", text: "Hello"},
@@ -13,10 +14,27 @@ import { selectChatMessages } from "../../store/chat/chat.selector";
 
 const Chat = () => {
     const messages = useSelector(selectChatMessages);
-    console.log("messages",messages);
+    const isLoading = useSelector(selectChatIsLoading);
+    const chatContainerRef = useRef();
+
+    const scrollToBottom = () => {
+        if (chatContainerRef.current){
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+            /*
+               * Note:
+               * The scrollHeight property returns the height of an element including padding, but excluding borders, scrollbars, or margins.
+               * The scrollTop property sets or returns the number of pixels an element's content is scrolled vertically.
+             */
+        }
+    }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [isLoading])
+
     return(
         <>
-        <Flex align="center" flexDirection="column" h="100%" overflowY="auto" flex="1" mb="2">
+        <Flex align="center" flexDirection="column" h="100%" overflowY="auto" flex="1" mb="2" ref={chatContainerRef}>
             {
                 messages.length <= 0 ? <ChatExample /> : messages.map((message, index) => {
                     return(
