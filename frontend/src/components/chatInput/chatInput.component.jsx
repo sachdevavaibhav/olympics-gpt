@@ -1,4 +1,4 @@
-import { Flex, Input, InputGroup, InputRightElement, Button, Spinner, Image } from "@chakra-ui/react";
+import { Flex, Input, InputGroup, InputRightElement, Button, Spinner, Image, Text, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage, getMessageResponse } from "../../store/chat/chat.reducer";
@@ -22,17 +22,21 @@ const ChatInput = () => {
         setQuery('')
     }
     return (
-        <Flex justify="center" mt="5" pos="fixed" bottom="10" left="0" right="0">
-            <InputGroup size='md' w="50%">
+        <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="5" pos="absolute" bottom="10" right="0" left="0">
+            <InputGroup w="50%">
                 <Input
-                    pr='4.5rem'
+                    p='1.8rem'
                     type='text'
                     placeholder='Ask me anything about Olympics'
                     onChange={handleChange}
                     value={query}
+                    size='lg'
+                    bgColor="#0E1525"
+                    focusBorderColor="#0E1525"
+                    borderColor="#0E1525"
+                    _hover={{borderColor: "#0E1525"}}
                 />
-                <InputRightElement width='4.5rem'>
-                    {
+                <InputRightElement width='5rem' height="100%">
                         <Button 
                         h='1.75rem' 
                         size='sm' 
@@ -40,12 +44,15 @@ const ChatInput = () => {
                         onClick={handleSubmit}
                         isLoading={isLoading}
                         spinner={<Spinner/>}
+                        bgColor="#0E1525"
                         >
-                            <Image src={sendIcon}/>
+                            <Image src={sendIcon} w="2.3rem"/>
                         </Button>
-                    }
                 </InputRightElement>
             </InputGroup>
+            <Box mt="3">
+                <Text color="#fff" fontSize="sm">Developed with love by Vaibhav</Text>
+            </Box>
         </Flex>
     )
 }

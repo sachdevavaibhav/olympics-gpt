@@ -4,11 +4,11 @@ import { Flex, Box } from "@chakra-ui/react";
 import {useSelector} from "react-redux";
 import { selectChatMessages } from "../../store/chat/chat.selector";
 
-// let chats = [
+// let messages = [
 //     {role: "user", text: "Hello"},
-//     {role: "system", text: "Hello! How can I help you today?"},
+//     {role: "assistant", text: "Hello! How can I help you today?"},
 //     {role: "user", text: "Hello"},
-//     {role: "system", text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio fugit odit vel sunt ad, esse porro cum saepe quas. Quas dolorum dolorem quasi, nam voluptatem atque veritatis cum quidem natus. Ex nulla consequatur recusandae error libero sequi voluptatibus numquam totam eos. Animi magni possimus accusamus officiis autem similique, mollitia recusandae provident quia laboriosam iste, corrupti nemo tenetur dolor dolore nisi. Suscipit vero ab dicta. Ad dolorum voluptates. Deleniti, omnis veritatis et dolorum ratione neque nobis veniam dignissimos facere reprehenderit, ad mollitia eius aliquid debitis, ut quod repudiandae tempore animi. Harum ullam eum vero pariatur ab, atque dolorem consequatur, illo, libero perferendis laboriosam quam laudantium porro incidunt! Adipisci nobis quas placeat voluptatem reiciendis, ipsum modi cupiditate molestiae asperiores consectetur veritatis?"}
+//     {role: "assistant", text: "Hello! How can I help you today?"},
 // ]
 
 const Chat = () => {
@@ -16,7 +16,7 @@ const Chat = () => {
     console.log("messages",messages);
     return(
         <>
-        <Flex justify="center" align="center" flexDirection="column">
+        <Flex justify="center" align="center" flexDirection="column" h="100%">
             {
                 messages.length <= 0 ? <ChatExample /> : messages.map((message, index) => {
                     return(
