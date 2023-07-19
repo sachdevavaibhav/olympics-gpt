@@ -1,11 +1,11 @@
-import { Box } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import ChatPage from "./pages/chatPage/chatPage.page"
 
 const App = () => {
   return (
-    <Box bgColor="#152136" color="#fff">
+    <Flex bgColor="#152136" color="#fff" h="100vh">
       <ChatPage />
-    </Box>
+    </Flex>
   )
 }
 

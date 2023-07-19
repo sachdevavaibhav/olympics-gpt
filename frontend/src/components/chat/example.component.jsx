@@ -3,7 +3,7 @@ import olympicLogo from "../../assets/olympic.png"
 
 const ChatExample = () => {
     return(
-        <Flex flexDirection="column" alignItems="center" justify="center" h="100vh">
+        <Flex flexDirection="column" alignItems="center" justify="center" h="full">
             <Box textAlign="center">
                 <Heading>OlympicsGPT</Heading>
                 <Text>Ask anything about Olympics</Text>

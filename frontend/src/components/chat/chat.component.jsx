@@ -16,7 +16,7 @@ const Chat = () => {
     console.log("messages",messages);
     return(
         <>
-        <Flex justify="center" align="center" flexDirection="column" h="100%">
+        <Flex align="center" flexDirection="column" h="100%" overflowY="auto" flex="1">
             {
                 messages.length <= 0 ? <ChatExample /> : messages.map((message, index) => {
                     return(

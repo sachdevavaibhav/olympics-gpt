@@ -22,7 +22,7 @@ const ChatInput = () => {
         setQuery('')
     }
     return (
-        <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="5" pos="absolute" bottom="10" right="0" left="0">
+        <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="5" w="full" mb="5" >
             <InputGroup w="50%">
                 <Input
                     p='1.8rem'
@@ -45,6 +45,7 @@ const ChatInput = () => {
                         isLoading={isLoading}
                         spinner={<Spinner/>}
                         bgColor="#0E1525"
+                        _hover={{bgColor: "#0E1525"}}
                         >
                             <Image src={sendIcon} w="2.3rem"/>
                         </Button>

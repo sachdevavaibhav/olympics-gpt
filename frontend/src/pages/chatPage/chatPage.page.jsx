@@ -5,12 +5,12 @@ import ChatInput from "../../components/chatInput/chatInput.component"
 
 const ChatPage = () => {
     return (
-        <Flex justify="center">
+        <Flex justify="center" h="full" w="full">
             <SideBar />
-            <Box pos="relative" overflowX="hidden" w="100%">
-                <Chat />
+            <Flex flexDir="column" justify="space-between" w="full" height="full" flex="1" overflowY="hidden">
+                <Chat />    
                 <ChatInput />
-            </Box>
+            </Flex>
         </Flex>
     )
 }
