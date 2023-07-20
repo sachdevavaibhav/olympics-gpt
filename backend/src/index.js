@@ -1,9 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import { generateResponse } from './utils/generateResponse.js'
 import { initialisePineconeClient } from './gpt/index.js'
-import {createQueryChain, queryModel } from './gpt/index.js'
+import {createQueryChain } from './gpt/index.js'
 import cors from 'cors'
+import healthCheckRoutes from './routes/healthcheck.js'
+import queryRoutes from './routes/query.js'
 dotenv.config()
 
 const app = express()
@@ -14,18 +15,19 @@ app.use(express.json())
 app.use(cors())
 
 const pineconeClient = await initialisePineconeClient();
-const chain = await createQueryChain(pineconeClient, 1, false);
+export const chain = await createQueryChain(pineconeClient, 1, false);
 
-app.get('/healthcheck', (req, res) => {
-    res.status(200).json(generateResponse(req, res, { message: 'Server is running' }))
-})
-
-app.post('/query', async (req, res) => {
-    const {query} = req.body; 
-    const queryRes = await queryModel(chain, query)
-    res.status(200).json(generateResponse(req, res, { queryRes }))
-})
+app.use('/api/healthcheck', healthCheckRoutes)
+app.use('/api/query', queryRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
+
+/* TODO:
+* handle query fail error
+* implement auth
+* implement user profile
+* implement user chat history
+* implement user settings
+*/
