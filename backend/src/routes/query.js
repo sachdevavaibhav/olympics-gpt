@@ -3,8 +3,9 @@ const router = express.Router();
 import { generateResponse } from '../utils/generateResponse.js';
 import { queryModel } from '../gpt/index.js';
 import { chain } from '../index.js';
+import {checkAuth} from '../middleware/checkAuth.js';
 
-router.post('', async (req, res) => {
+router.post('',checkAuth ,async (req, res) => {
     try {
         const {query} = req.body; 
         if (!query) {
