@@ -44,9 +44,9 @@ app.listen(PORT, () => {
 })
 
 /* TODO:
-* handle query fail error
-* implement auth
-* implement user profile
-* implement user chat history
+* handle query fail error (done)
+* implement auth (done)
+* implement user chat history and move query to controller
+* collect olympic data
 * implement user settings
 */
