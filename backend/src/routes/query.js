@@ -8,7 +8,7 @@ router.post('', async (req, res) => {
     try {
         const {query} = req.body; 
         if (!query) {
-            res.status(400);
+            res.status(403);
             throw new Error("No query provided");
         }
         const queryRes = await queryModel(chain, query)
