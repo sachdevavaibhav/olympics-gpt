@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
 const initialState = {
     user: null,
@@ -10,7 +10,7 @@ const initialState = {
 
 const login = createAsyncThunk("user/login", async ({email, password}, {rejectWithValue}) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/auth/login`, { email, password })    
+        const response = await axiosInstance.post('/auth/login', { email, password })    
         console.log("login response", response)
         return response.data.response.data
     }
@@ -21,7 +21,7 @@ const login = createAsyncThunk("user/login", async ({email, password}, {rejectWi
 
 const register = createAsyncThunk("user/register", async ({email, password}, {rejectWithValue}) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/auth/register`, { email, password })    
+        const response = await axiosInstance.post('/auth/register', { email, password })    
         return response.data.response.data.user
     }
     catch (error) {
@@ -32,7 +32,7 @@ const register = createAsyncThunk("user/register", async ({email, password}, {re
 const getUser = createAsyncThunk("user/getUser", async ({token} ,{rejectWithValue}) => {
     try {
         console.log("token", token)
-        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/auth/getUser`, {token})  
+        const response = await axiosInstance.post(`/auth/getUser`, {token})  
         console.log("getUser response", response) 
         return response.data.response.data.user
     }
@@ -48,6 +48,13 @@ const userSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload
+        },
+        logout: (state) => {
+            state.user = null
+            state.isLoading = false
+            state.error = null
+            state.success = null
+            localStorage.removeItem("token")
         }
     },
     extraReducers: (builder) => {
@@ -57,7 +64,6 @@ const userSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, action) => {
             localStorage.setItem("token", action.payload.token)
-            axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload.token}`
             state.user = action.payload.user
             state.isLoading = false
             state.success = true
@@ -97,6 +103,6 @@ const userSlice = createSlice({
     }
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, logout } = userSlice.actions
 export { login, register, getUser }
 export const userReducer = userSlice.reducer

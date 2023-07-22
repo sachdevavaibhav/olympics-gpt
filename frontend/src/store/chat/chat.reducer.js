@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 
 const initialState = {
     messages: [],
@@ -7,17 +7,13 @@ const initialState = {
     error: null
 }
 
-const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (query) => {
-    console.log("Process", import.meta.env.VITE_BASE_API_URL)
+const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (query, {rejectWithValue}) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/query`, { query })
+        const response = await axiosInstance.post('/query', { query })
         return response.data.response.data.queryRes
     }
-    catch (err) {
-        if (err.response.status === 401) {
-            window.location.href = "http://localhost:5173/auth"
-            localStorage.token = ""
-        }
+    catch (error) {
+        return rejectWithValue(error.response.data.response)
     }
     
 })
@@ -39,7 +35,7 @@ const chatSlice = createSlice({
             state.isLoading = false
         })
         builder.addCase(getMessageResponse.rejected, (state, action) => {
-            state.error = action.error.message
+            state.error = action
             state.messages.push({role:"assistant", text: "Sorry, something went wrong. Please try again later."})
             state.isLoading = false
         })

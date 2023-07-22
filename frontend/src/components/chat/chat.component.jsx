@@ -3,7 +3,7 @@ import ChatExample from "./example.component";
 import Message from "../message/message.component";
 import { Flex, Box } from "@chakra-ui/react";
 import {useSelector} from "react-redux";
-import { selectChatMessages, selectChatIsLoading } from "../../store/chat/chat.selector";
+import { selectChatMessages, selectChatIsLoading, selectChatError } from "../../store/chat/chat.selector";
 
 // let messages = [
 //     {role: "user", text: "Hello"},
@@ -15,6 +15,7 @@ import { selectChatMessages, selectChatIsLoading } from "../../store/chat/chat.s
 const Chat = () => {
     const messages = useSelector(selectChatMessages);
     const isLoading = useSelector(selectChatIsLoading);
+    const error = useSelector(selectChatError);
     const chatContainerRef = useRef();
 
     const scrollToBottom = () => {
@@ -31,6 +32,13 @@ const Chat = () => {
     useEffect(() => {
         scrollToBottom();
     }, [isLoading])
+
+    useEffect(() => {
+        if (error?.payload.status == 401) {
+            window.location.reload();
+
+        }
+    }, [error])
 
     return(
         <>
