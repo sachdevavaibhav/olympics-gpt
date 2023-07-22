@@ -57,6 +57,7 @@ const userSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, action) => {
             localStorage.setItem("token", action.payload.token)
+            axios.defaults.headers.common['Authorization'] = `Bearer ${action.payload.token}`
             state.user = action.payload.user
             state.isLoading = false
             state.success = true

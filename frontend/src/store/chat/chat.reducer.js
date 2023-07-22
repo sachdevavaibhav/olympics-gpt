@@ -9,19 +9,14 @@ const initialState = {
 
 const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (query) => {
     console.log("Process", import.meta.env.VITE_BASE_API_URL)
-    const token = localStorage.getItem("token")
-    if (!token) {
-        window.location.href = "http://localhost:5173/auth"
-    }
-
     try {
-        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/query`, { query }, 
-        { headers: { Authorization: `Bearer ${token}` } })
-        return response.data.response.queryRes
+        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/query`, { query })
+        return response.data.response.data.queryRes
     }
     catch (err) {
         if (err.response.status === 401) {
             window.location.href = "http://localhost:5173/auth"
+            localStorage.token = ""
         }
     }
     
