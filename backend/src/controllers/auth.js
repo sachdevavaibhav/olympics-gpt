@@ -46,6 +46,27 @@ export const login = async (req, res) => {
         throw new Error('Auth failed');
     }
     // generate token
-    const token = jwt.sign({email: user.email, id: user.id}, process.env.JWT_SECRET, {expiresIn: '1h'});
+    const token = jwt.sign({email: user.email, id: user.id}, process.env.JWT_SECRET, {expiresIn: 1000*60});
     return {token, user: {uid: user.id, username: user.username}};
+}
+
+export const getUser = async (req, res) => {
+    // check if user exists based on the token received
+    try {
+        const {token} = req.body;
+        if (!token) {
+            return {error: {message: 'Invalid request', status:400}};
+        }
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        // get id from token and check
+        const userExists = await db.collection('users').doc(decodedToken.id).get();
+        if (!userExists.exists) {
+            return {error: {message: 'Auth failed', status:401}};
+        }
+        const user = userExists.data();
+        return {user: {uid: user.id, username: user.username}};
+    }
+    catch (error) {
+        return {error: {message: 'Auth failed', status:401}}
+    }
 }

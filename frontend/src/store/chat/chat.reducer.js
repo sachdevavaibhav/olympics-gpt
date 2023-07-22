@@ -9,9 +9,22 @@ const initialState = {
 
 const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (query) => {
     console.log("Process", import.meta.env.VITE_BASE_API_URL)
-    const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/query`, { query })
+    const token = localStorage.getItem("token")
+    if (!token) {
+        window.location.href = "http://localhost:5173/auth"
+    }
+
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_API_URL}/query`, { query }, 
+        { headers: { Authorization: `Bearer ${token}` } })
+        return response.data.response.queryRes
+    }
+    catch (err) {
+        if (err.response.status === 401) {
+            window.location.href = "http://localhost:5173/auth"
+        }
+    }
     
-    return response.data.response.queryRes
 })
 
 const chatSlice = createSlice({

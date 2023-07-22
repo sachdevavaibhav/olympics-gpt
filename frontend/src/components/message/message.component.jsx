@@ -15,11 +15,9 @@ const Message = ({message, role}) => {
                 </WrapItem>
             </Wrap>
             <Box w="40%">
-                <Text>
-                    <ReactMarkdown>
-                        {message}
-                    </ReactMarkdown>
-                </Text>
+                <ReactMarkdown>
+                    {message}
+                </ReactMarkdown>
             </Box>
         </Flex>
     );
