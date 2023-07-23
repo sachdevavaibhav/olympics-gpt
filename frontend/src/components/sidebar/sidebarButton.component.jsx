@@ -3,7 +3,6 @@ import { Flex, Icon } from "@chakra-ui/react";
 const SidebarButton = (props) => {
 
     const { icon, children, onClickHandler } = props;
-    console.log("rendering sidebar button", onClickHandler)
     return (
       <Flex
         align="center"

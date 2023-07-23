@@ -11,7 +11,6 @@ const initialState = {
 const login = createAsyncThunk("user/login", async ({email, password}, {rejectWithValue}) => {
     try {
         const response = await axiosInstance.post('/auth/login', { email, password })    
-        console.log("login response", response)
         return response.data.response.data
     }
     catch (error) {
@@ -19,9 +18,9 @@ const login = createAsyncThunk("user/login", async ({email, password}, {rejectWi
     }
 })
 
-const register = createAsyncThunk("user/register", async ({email, password}, {rejectWithValue}) => {
+const register = createAsyncThunk("user/signup", async ({email, password}, {rejectWithValue}) => {
     try {
-        const response = await axiosInstance.post('/auth/register', { email, password })    
+        const response = await axiosInstance.post('/auth/signup', { email, password })    
         return response.data.response.data.user
     }
     catch (error) {
@@ -31,13 +30,10 @@ const register = createAsyncThunk("user/register", async ({email, password}, {re
 
 const getUser = createAsyncThunk("user/getUser", async ({token} ,{rejectWithValue}) => {
     try {
-        console.log("token", token)
         const response = await axiosInstance.post(`/auth/getUser`, {token})  
-        console.log("getUser response", response) 
         return response.data.response.data.user
     }
     catch (error) {
-        console.log("error", error)
         return rejectWithValue(error.response.data.response)
     }
 })

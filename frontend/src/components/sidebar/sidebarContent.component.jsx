@@ -10,7 +10,6 @@ const SidebarContent = ({ ...props }) => {
     const onClickHandler = () => {
       dispatch(logout());
     }
-    console.log("rendering sidebar content", onClickHandler)
     return ( 
         <Box
         as="nav"

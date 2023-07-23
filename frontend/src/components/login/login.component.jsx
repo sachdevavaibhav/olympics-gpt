@@ -26,13 +26,13 @@ const Login = () => {
         }
     }, [user])
     return (
-        <FormControl as="form" display="flex" flexDir="column" justifyContent="center" alignItems="center" onSubmit={handleSubmit}>
+        <FormControl id="login" as="form" display="flex" flexDir="column" justifyContent="center" alignItems="center" onSubmit={handleSubmit}>
             <Box mb="5">
                 <Heading size="lg">Login</Heading>
             </Box>
             <Box>
                 <FormLabel>Email address</FormLabel>
-                <Input type='email' name='email' onChange={handleChange} />
+                <Input id="loginInput" type='email' name='email' onChange={handleChange} />
                 <FormHelperText>We'll never share your email.</FormHelperText>
             </Box>
             <Box>
