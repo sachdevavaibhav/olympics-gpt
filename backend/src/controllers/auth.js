@@ -13,7 +13,7 @@ export const signup = async (req, res) => {
     const userExists = await db.collection('users').where('email', '==', email).get();
     if (!userExists.empty) {
         res.status(403);
-        throw new Error('Signup failed');
+        throw new Error('User already exists. Please login');
     }
     const username = email.split('@')[0];
     const salt = await bcrypt.genSalt(10);

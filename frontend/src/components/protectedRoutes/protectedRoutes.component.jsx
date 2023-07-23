@@ -9,7 +9,7 @@ const ProtectectedRoutes = () => {
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (!token || !user) {
-            navigate("/auth")
+            navigate("/auth/login")
             return
         }
     }, [user])

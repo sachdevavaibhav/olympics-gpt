@@ -1,14 +1,14 @@
 import { Flex } from "@chakra-ui/react";
-import Login from "../../components/login/login.component";
-import SignUp from "../../components/signup/signup.component";
+import { Outlet } from "react-router-dom";
 
 const AuthPage = () => {
     return (
         <Flex justify="center" w="full" alignItems="center">
-            <Login />
-            <SignUp />
+            <Outlet />
         </Flex>
     );
 }
 
 export default AuthPage;
+
+// #1D283D

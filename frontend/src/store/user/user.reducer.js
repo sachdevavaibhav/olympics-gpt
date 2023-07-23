@@ -63,9 +63,11 @@ const userSlice = createSlice({
             state.user = action.payload.user
             state.isLoading = false
             state.success = true
+            state.error = null
         })
         builder.addCase(login.rejected, (state, action) => {
-            state.error = action.error.message
+            console.log(action)
+            state.error = action.payload
             state.isLoading = false
         })
 
@@ -77,9 +79,11 @@ const userSlice = createSlice({
             state.user = action.payload
             state.isLoading = false
             state.success = true
+            state.error = null
         })
         builder.addCase(register.rejected, (state, action) => {
-            state.error = action.error.message
+            console.log("from signup", action)
+            state.error = action.payload
             state.isLoading = false
         })
         
@@ -93,7 +97,7 @@ const userSlice = createSlice({
             state.success = true
         })
         builder.addCase(getUser.rejected, (state, action) => {
-            state.error = action.error.message
+            state.error = action.payload
             state.isLoading = false
         })
     }
