@@ -34,13 +34,15 @@ export const getChatHistory = async (chatId) => {
 
 export const getRecentChatHistory = async (chatId, k) => {
   // get messages from messages subcollection
+  console.log("getRecentChatHistory")
   const chatRef = await db.collection("chats").doc(chatId)
-  const messagesRef = await chatRef.collection("messages").orderBy("createdAt").limit(k).get()
+  const messagesRef = await chatRef.collection("messages").orderBy("createdAt", "desc").limit(k).get()
   const messages = []
   messagesRef.forEach((message) => {
-    messages.push(message.data())
+    const {role, text} = message.data()
+    messages.push({role, text})
   })
-  return messages
+  return messages.reverse()
 }
 
 export const getAllUserChats = async (userId) => {
@@ -84,9 +86,9 @@ export const updateChatHistory = async (chatId, message) => {
 
 /*
 Functions to be created:
-        1. getRecentChatHistory
-        2. getChatHistory
-        3. createChat
-        4. getAllUserChats
-        5. UpdateChatHistory
+        1. getRecentChatHistory /api/chat/recent
+        2. getChatHistory /api/chat/history (done)
+        3. createChat /api/chat/create (done)
+        4. getAllUserChats /api/chat/all (done)
+        5. UpdateChatHistory /api/chat/message (done)
 */
