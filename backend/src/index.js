@@ -5,7 +5,7 @@ import { initialisePineconeClient } from './gpt/index.js'
 import {createQueryChain } from './gpt/index.js'
 import cors from 'cors'
 import healthCheckRoutes from './routes/healthcheck.js'
-import queryRoutes from './routes/query.js'
+import chatRoutes from './routes/chat.js'
 import authRoutes from './routes/auth.js'
 dotenv.config()
 
@@ -23,7 +23,7 @@ export const chain = await createQueryChain(pineconeClient, 1, false);
 
 // routes
 app.use('/api/healthcheck', healthCheckRoutes)
-app.use('/api/query', queryRoutes)
+app.use('/api/query', chatRoutes)
 app.use('/api/auth', authRoutes)
 
 // 404 error handling

@@ -1,12 +1,12 @@
 import { loadPdf, splitDocs,initialisePineconeClient } from "./pinecone/pinecone.js";
-import { createQueryChain, queryModel } from "./pinecone/query.js";
+import { createQueryChain } from "./pinecone/chain.js";
 
 export {loadPdf};
 export {splitDocs};
 export {initialisePineconeClient};
 
 export {createQueryChain};
-export {queryModel};
+
 
 
 

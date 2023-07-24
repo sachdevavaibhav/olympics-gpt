@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { generateResponse } from '../utils/generateResponse.js';
-import { queryModel } from '../gpt/index.js';
+import { queryModel } from '../controllers/chat.js';
 import { chain } from '../index.js';
 import {checkAuth} from '../middleware/checkAuth.js';
 
