@@ -1,3 +1,5 @@
+import { db } from "../utils/firebase/firebase.js";
+
 export const queryModel = async (chain, query) => {
     const response = await chain.call({ question: query });
     console.log(response);

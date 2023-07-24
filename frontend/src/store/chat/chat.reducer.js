@@ -9,7 +9,7 @@ const initialState = {
 
 const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (query, {rejectWithValue}) => {
     try {
-        const response = await axiosInstance.post('/query', { query })
+        const response = await axiosInstance.post('/chat/query', { query })
         return response.data.response.data.queryRes
     }
     catch (error) {

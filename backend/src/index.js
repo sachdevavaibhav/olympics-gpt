@@ -23,7 +23,7 @@ export const chain = await createQueryChain(pineconeClient, 1, false);
 
 // routes
 app.use('/api/healthcheck', healthCheckRoutes)
-app.use('/api/query', chatRoutes)
+app.use('/api/chat', chatRoutes)
 app.use('/api/auth', authRoutes)
 
 // 404 error handling
