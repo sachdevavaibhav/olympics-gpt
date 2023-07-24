@@ -35,4 +35,30 @@ export const createDocument = async (collectionName, document) => {
       }
  * Chats - all chats -> create, read
  * settings (may be)
+ * chats = {
+    *  chatId: string,
+    *  userId: string,
+    *  createdAt: timestamp,
+    *  messages: [
+        *  {
+        *  role: string,
+        *  text: string,
+        *  createdAt: timestamp,
+        * },
+        * {
+        *  role: string,
+        *  text: string,
+        *  createdAt: timestamp,
+        * }
+    * ]
+ * }
  */
+
+/*
+ Functions to be created:
+          1. getRecentChatHistory
+          2. getChatHistory
+          3. createChat
+          4. getAllUserChats
+          5. UpdateChatHistory
+*/
