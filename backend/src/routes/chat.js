@@ -49,7 +49,6 @@ router.post('/query',checkAuth ,async (req, res) => {
         let isFirstMessage = false;
         const message = {role:"user", text: query}
         if (!chatId) {
-            console.log("no chat id")
             const userId = req.userData.userId;
             chatId = uuidv4();
             if (!userId || !chatId || !query) {
@@ -61,11 +60,9 @@ router.post('/query',checkAuth ,async (req, res) => {
         }
         const queryRes = await queryModel(chain, query)
         if (isFirstMessage) {
-            console.log("first message")
             await updateChatHistory(chatId, queryRes)
         }
         else {
-            console.log("not first message")
             await updateChatHistory(chatId, message)
             await updateChatHistory(chatId, queryRes)
         }

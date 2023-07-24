@@ -34,7 +34,6 @@ export const getChatHistory = async (chatId) => {
 
 export const getRecentChatHistory = async (chatId, k) => {
   // get messages from messages subcollection
-  console.log("getRecentChatHistory")
   const chatRef = await db.collection("chats").doc(chatId)
   const messagesRef = await chatRef.collection("messages").orderBy("createdAt", "desc").limit(k).get()
   const messages = []
