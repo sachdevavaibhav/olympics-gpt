@@ -45,8 +45,8 @@ export const getRecentChatHistory = async (chatId, k) => {
 }
 
 export const getAllUserChats = async (userId) => {
-  // get all chats of user
-  const chatsRef = await db.collection("chats").where("userId", "==", userId).get()
+  // get all chats of user from chats collection ordered by createdAt
+  const chatsRef = await db.collection("chats").where("userId", "==", userId).orderBy("createdAt").get()
   const chats = []
   chatsRef.forEach((chat) => {
     chats.push(chat.data())

@@ -49,9 +49,13 @@ const chatSlice = createSlice({
             state.success = false
         })
         builder.addCase(getMessageResponse.fulfilled, (state, action) => {
-            state.chatId = action.payload.chatId
+            // update chatId if it is null
+            if (!state.chatId) {
+                state.chatId = action.payload.chatId
+                state.allChats = [{chatId: action.payload.chatId}, ...state.allChats]
+            }
+            // state.chatId = action.payload.chatId
             state.messages.push(action.payload.queryRes)
-            state.allChats = [{chatId: action.payload.chatId}, ...state.allChats]
             state.isLoading = false
         })
         builder.addCase(getMessageResponse.rejected, (state, action) => {

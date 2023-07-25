@@ -34,7 +34,7 @@ const Chat = () => {
     }, [isLoading])
 
     useEffect(() => {
-        if (error?.payload.status == 401) {
+        if (error?.payload?.status == 401) {
             window.location.reload();
 
         }
