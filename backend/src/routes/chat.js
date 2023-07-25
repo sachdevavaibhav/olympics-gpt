@@ -58,7 +58,8 @@ router.post('/query',checkAuth ,async (req, res) => {
             isFirstMessage = true;
             await createChat(userId, chatId, message)
         }
-        const queryRes = await queryModel(chain, query)
+        const queryRes = await queryModel(chain, query, chatId)
+        console.log("Response",queryRes)
         if (isFirstMessage) {
             await updateChatHistory(chatId, queryRes)
         }
@@ -96,7 +97,7 @@ router.get('/history/:chatid',checkAuth ,async (req, res) => {
             throw new Error("No chat id provided");
         }
         const messages = await getChatHistory(chatid)
-        res.status(200).json(generateResponse(req, res, { messages }))
+        res.status(200).json(generateResponse(req, res, messages))
     } catch (error) {
         const statusCode = res.statusCode || 500;
         res.status(statusCode).json(generateResponse(req, res, { message: error.message }))

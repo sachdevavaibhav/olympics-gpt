@@ -1,4 +1,4 @@
-import { Flex, Icon } from "@chakra-ui/react";
+import { Flex, Icon, Text } from "@chakra-ui/react";
 
 const SidebarButton = (props) => {
 
@@ -10,6 +10,7 @@ const SidebarButton = (props) => {
         py="3"
         cursor="pointer"
         role="button"
+        id={props.id}
         onClick={onClickHandler}
         fontWeight="semibold"
         transition=".15s ease"
@@ -27,7 +28,9 @@ const SidebarButton = (props) => {
             as={icon}
           />
         )}
-        {children}
+        <Text style={{whiteSpace: "nowrap", textOverflow: "ellipsis"}} overflow="hidden" id={props.id}>
+          {children}
+        </Text>
       </Flex>
     );
   };

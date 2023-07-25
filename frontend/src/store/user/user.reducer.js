@@ -51,6 +51,7 @@ const userSlice = createSlice({
             state.error = null
             state.success = null
             localStorage.removeItem("token")
+            window.location.reload()
         }
     },
     extraReducers: (builder) => {

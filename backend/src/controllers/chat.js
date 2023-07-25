@@ -1,9 +1,36 @@
 import { db } from "../utils/firebase/firebase.js";
+import { AIMessage, HumanMessage } from "langchain/schema";
 
-export const queryModel = async (chain, query) => {
-    const response = await chain.call({ question: query });
-    console.log(response);
-    return {role:"assistant", text: response.text};
+export const mapToMemory = (messages) => {
+  if (!messages) {
+    return []
+  }
+  const memoryMessages = []
+  messages.forEach((message) => {
+    if (message.role === "user") {
+      memoryMessages.push(new HumanMessage(message.text))
+    }
+    else {
+      memoryMessages.push(new AIMessage(message.text))
+    }
+  })
+  return memoryMessages
+}
+
+
+export const queryModel = async (chain, query, chatId) => {
+  const recentMessages = await getRecentChatHistory(chatId, 6)
+  const memoryMessages = mapToMemory(recentMessages)
+  console.log(memoryMessages)
+  // const memory = new BufferMemory(
+  //   {memoryKey:"chat_history",chatHistory: new ChatMessageHistory(memoryMessages)}
+  // )
+  // console.log(memory)
+  const response = await chain.call(
+    { question: query, chat_history: memoryMessages }
+  );
+  console.log(response);
+  return {role:"assistant", text: response.text};
 }
 
 export const createChat = async (userId, chatId, message) => {
@@ -27,9 +54,10 @@ export const getChatHistory = async (chatId) => {
   const messagesRef = await chatRef.collection("messages").orderBy("createdAt").get()
   const messages = []
   messagesRef.forEach((message) => {
-    messages.push(message.data())
+    const {role, text} = message.data()
+    messages.push({role, text})
   })
-  return messages
+  return {chatId, messages}
 }
 
 export const getRecentChatHistory = async (chatId, k) => {
@@ -45,8 +73,8 @@ export const getRecentChatHistory = async (chatId, k) => {
 }
 
 export const getAllUserChats = async (userId) => {
-  // get all chats of user
-  const chatsRef = await db.collection("chats").where("userId", "==", userId).get()
+  // get all chats of user from chats collection ordered by createdAt
+  const chatsRef = await db.collection("chats").where("userId", "==", userId).orderBy("createdAt").get()
   const chats = []
   chatsRef.forEach((chat) => {
     chats.push(chat.data())
@@ -62,7 +90,6 @@ export const updateChatHistory = async (chatId, message) => {
   await messageRef.set(message)
   return chatId
 }
-
 
 /* chats = {
   *  chatId: string,
