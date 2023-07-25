@@ -22,10 +22,6 @@ export const queryModel = async (chain, query, chatId) => {
   const recentMessages = await getRecentChatHistory(chatId, 6)
   const memoryMessages = mapToMemory(recentMessages)
   console.log(memoryMessages)
-  // const memory = new BufferMemory(
-  //   {memoryKey:"chat_history",chatHistory: new ChatMessageHistory(memoryMessages)}
-  // )
-  // console.log(memory)
   const response = await chain.call(
     { question: query, chat_history: memoryMessages }
   );
@@ -42,10 +38,11 @@ export const createChat = async (userId, chatId, message) => {
   await chatRef.set({
     chatId: chatId,
     userId: userId,
+    title: message.text,
     createdAt: new Date(),
   })
   await messageRef.set(message)
-  return chatId
+  return {chatId, title: message.text}
 }
 
 export const getChatHistory = async (chatId) => {
@@ -79,7 +76,7 @@ export const getAllUserChats = async (userId) => {
   chatsRef.forEach((chat) => {
     chats.push(chat.data())
   })
-  return chats
+  return chats.reverse()
 }
 
 export const updateChatHistory = async (chatId, message) => {
