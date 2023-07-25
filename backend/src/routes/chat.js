@@ -96,7 +96,7 @@ router.get('/history/:chatid',checkAuth ,async (req, res) => {
             throw new Error("No chat id provided");
         }
         const messages = await getChatHistory(chatid)
-        res.status(200).json(generateResponse(req, res, { messages }))
+        res.status(200).json(generateResponse(req, res, messages))
     } catch (error) {
         const statusCode = res.statusCode || 500;
         res.status(statusCode).json(generateResponse(req, res, { message: error.message }))

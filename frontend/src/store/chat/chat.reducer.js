@@ -7,6 +7,7 @@ const initialState = {
     allChats: [],
     isLoading: false,
     isAllChatsLoading: false,
+    isChatHistoryLoading: false,
     error: null
 }
 
@@ -35,12 +36,33 @@ const getAllChats = createAsyncThunk("chat/all", async (_, {rejectWithValue}) =>
     }
 })
 
+const getChatHistory = createAsyncThunk("chat/history", async (chatId, {rejectWithValue, getState}) => {
+    const currentChatId = getState().chat.chatId
+    console.log(currentChatId)
+    if (currentChatId === chatId) return
+    try {
+        const response = await axiosInstance.get(`/chat/history/${chatId}`)
+        return response.data.response.data
+    }
+    catch (error) {
+        return rejectWithValue(error.response.data.response)
+    }
+})
+
 const chatSlice = createSlice({
     name: 'chat',
     initialState: initialState,
     reducers: {
         addMessage: (state, action) => {
             state.messages.push(action.payload) // under the hood, immer is used to make this immutable
+        },
+        newChat: (state) => {
+            state.chatId = null;
+            state.messages = [];
+            state.isLoading = false,
+            state.isAllChatsLoading =false,
+            state.isChatHistoryLoading = false,
+            state.error = null
         }
     },
     extraReducers: (builder) => {
@@ -76,9 +98,24 @@ const chatSlice = createSlice({
             state.error = action.payload
             state.isAllChatsLoading = false
         })
+
+        // getChatHistory
+        builder.addCase(getChatHistory.pending, (state) => {
+            state.isChatHistoryLoading = true
+        })
+        builder.addCase(getChatHistory.fulfilled, (state, action) => {
+            if (!action.payload) return
+            state.chatId = action.payload.chatId
+            state.messages = action.payload.messages
+            state.isChatHistoryLoading = false
+        })
+        builder.addCase(getChatHistory.rejected, (state, action) => {
+            state.error = action.payload
+            state.isChatHistoryLoading = false
+        })
     }
 })
 
-export const { addMessage } = chatSlice.actions
-export { getMessageResponse, getAllChats }
+export const { addMessage, newChat } = chatSlice.actions
+export { getMessageResponse, getAllChats, getChatHistory }
 export const chatReducer = chatSlice.reducer    

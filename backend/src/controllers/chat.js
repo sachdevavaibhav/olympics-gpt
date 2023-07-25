@@ -27,9 +27,10 @@ export const getChatHistory = async (chatId) => {
   const messagesRef = await chatRef.collection("messages").orderBy("createdAt").get()
   const messages = []
   messagesRef.forEach((message) => {
-    messages.push(message.data())
+    const {role, text} = message.data()
+    messages.push({role, text})
   })
-  return messages
+  return {chatId, messages}
 }
 
 export const getRecentChatHistory = async (chatId, k) => {
