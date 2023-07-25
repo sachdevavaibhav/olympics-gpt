@@ -58,7 +58,8 @@ router.post('/query',checkAuth ,async (req, res) => {
             isFirstMessage = true;
             await createChat(userId, chatId, message)
         }
-        const queryRes = await queryModel(chain, query)
+        const queryRes = await queryModel(chain, query, chatId)
+        console.log("Response",queryRes)
         if (isFirstMessage) {
             await updateChatHistory(chatId, queryRes)
         }

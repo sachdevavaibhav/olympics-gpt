@@ -28,7 +28,7 @@ const SidebarButton = (props) => {
             as={icon}
           />
         )}
-        <Text style={{whiteSpace: "nowrap", textOverflow: "ellipsis"}} overflow="hidden">
+        <Text style={{whiteSpace: "nowrap", textOverflow: "ellipsis"}} overflow="hidden" id={props.id}>
           {children}
         </Text>
       </Flex>

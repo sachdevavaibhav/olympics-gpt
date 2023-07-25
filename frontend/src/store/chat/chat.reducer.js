@@ -77,6 +77,9 @@ const chatSlice = createSlice({
                 state.allChats = [{chatId: action.payload.chatId}, ...state.allChats]
             }
             // state.chatId = action.payload.chatId
+            if (!action.payload.queryRes || !action.payload.queryRes.role || !action.payload.queryRes.text) {
+                action.payload.queryRes = {role:"assistant", text: "Sorry, something went wrong. Please try again later."}
+            }
             state.messages.push(action.payload.queryRes)
             state.isLoading = false
         })

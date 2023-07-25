@@ -2,7 +2,6 @@ import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { OpenAI } from "langchain/llms/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { BufferMemory } from "langchain/memory";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -25,11 +24,8 @@ export const createQueryChain = async (pineconeClient, k=1, returnSourceDocs=fal
     console.log(model.modelName)
     
     const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever(), {
-      memory: new BufferMemory({
-        memoryKey: "chat_history", // Must be set to "chat_history"
-        k,
-        returnSourceDocs,
-      }),
+      k,
+      returnSourceDocs
     });
     return chain;
 }
