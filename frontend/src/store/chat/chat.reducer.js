@@ -15,6 +15,7 @@ const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (qu
     try {
         const chatId = getState().chat.chatId
         const response = await axiosInstance.post('/chat/query', { query, chatId })
+        console.log(response)
         return response.data.response.data
     }
     catch (error) {
@@ -27,7 +28,7 @@ const getAllChats = createAsyncThunk("chat/all", async (_, {rejectWithValue}) =>
     try {
         const response = await axiosInstance.get('/chat/all')
         const chats = response.data.response.data.chats.map(chat => {
-            return {chatId: chat.chatId}
+            return {chatId: chat.chatId, title: chat.title}
         })
         return chats
     }
@@ -74,7 +75,7 @@ const chatSlice = createSlice({
             // update chatId if it is null
             if (!state.chatId) {
                 state.chatId = action.payload.chatId
-                state.allChats = [{chatId: action.payload.chatId}, ...state.allChats]
+                state.allChats = [{chatId: action.payload.chatId, title: action.meta.arg}, ...state.allChats]
             }
             // state.chatId = action.payload.chatId
             if (!action.payload.queryRes || !action.payload.queryRes.role || !action.payload.queryRes.text) {

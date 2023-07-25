@@ -42,7 +42,7 @@ const SidebarContent = ({ ...props }) => {
                         allChats.map((chat, idx) => {
                             return (
                                 <Box key={idx} onClick={loadChatHistory}>
-                                    <SidebarButton icon={PiChatDotsFill} id={chat.chatId}>{chat.chatId}</SidebarButton>
+                                    <SidebarButton icon={PiChatDotsFill} id={chat.chatId}>{chat.title}</SidebarButton>
                                 </Box>
                             )
                         })
