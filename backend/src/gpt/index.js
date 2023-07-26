@@ -1,7 +1,8 @@
-import { loadPdf, splitDocs,initialisePineconeClient } from "./pinecone/pinecone.js";
+import { loadPdf, loadText ,splitDocs,initialisePineconeClient } from "./pinecone/pinecone.js";
 import { createQueryChain } from "./pinecone/chain.js";
 
 export {loadPdf};
+export {loadText};
 export {splitDocs};
 export {initialisePineconeClient};
 

@@ -1,4 +1,5 @@
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { TextLoader } from "langchain/document_loaders/fs/text";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { PineconeClient } from "@pinecone-database/pinecone";
 import dotenv from 'dotenv'
@@ -7,6 +8,16 @@ dotenv.config()
 export const loadPdf = async (path, splitPages=true) => {
     try {
         const loader = new PDFLoader(path, splitPages); 
+        const docs = await loader.load();
+        return docs        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const loadText = async (path) => {
+    try {
+        const loader = new TextLoader(path); 
         const docs = await loader.load();
         return docs        
     } catch (error) {
