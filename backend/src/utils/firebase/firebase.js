@@ -1,7 +1,10 @@
 import { initializeApp, cert } from 'firebase-admin/app';
 import {getFirestore} from 'firebase-admin/firestore';
-import firebaseServiceAccount from '../../../firebase.json' assert {type: 'json'};
+// import firebaseServiceAccount from '../../../firebase.json';
 import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
+
+const firebaseServiceAccount = JSON.parse(fs.readFileSync('./firebase.json', 'utf8'));
 
 const app = initializeApp({
   credential: cert(firebaseServiceAccount)
