@@ -1,5 +1,4 @@
 import { Box,VStack,Flex, Icon, Text, Spinner } from "@chakra-ui/react"
-import { RiFlashlightFill } from 'react-icons/ri';
 import olympicLamp from '../../assets/torch.svg';
 import {CgLogOut} from 'react-icons/cg'
 import {PiChatDotsFill, PiPlusCircleFill} from 'react-icons/pi'
@@ -48,35 +47,6 @@ const SidebarContent = ({ ...props }) => {
                             )
                         })
                     }
-                    {/* <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
-                    <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton> */}
                 </Box>
                 <Box w="full" mb="5">
                     <Flex
