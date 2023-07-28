@@ -1,18 +1,21 @@
-import { Box,VStack,Flex, Icon, Text, Spinner } from "@chakra-ui/react"
+import { Box,VStack,Flex, Text, Spinner } from "@chakra-ui/react"
 import olympicLamp from '../../assets/torch.svg';
 import {CgLogOut} from 'react-icons/cg'
 import {PiChatDotsFill, PiPlusCircleFill} from 'react-icons/pi'
+import {BiSolidUserCircle} from 'react-icons/bi'
 import SidebarButton from "./sidebarButton.component";
 import { logout } from '../../store/user/user.reducer';
 import { getChatHistory, newChat } from "../../store/chat/chat.reducer";
 import { selectAllChats, selectAllChatsIsLoading } from "../../store/chat/chat.selector";
+import { selectUser } from "../../store/user/user.selector";
 import { useDispatch, useSelector } from 'react-redux';
 
 const SidebarContent = ({ ...props }) => {
     const dispatch = useDispatch();
     const allChats = useSelector(selectAllChats);
     const isLoading = useSelector(selectAllChatsIsLoading);
-
+    const user = useSelector(selectUser);
+    console.log(user);
     const onClickHandler = () => {
       dispatch(logout());
     }
@@ -57,6 +60,7 @@ const SidebarContent = ({ ...props }) => {
                         aria-label="logout"
                     >
                         <SidebarButton icon={CgLogOut} onClickHandler={onClickHandler}>Logout</SidebarButton>
+                        <SidebarButton icon={BiSolidUserCircle}>{user?.username}</SidebarButton>
                     </Flex>
                 </Box>
 

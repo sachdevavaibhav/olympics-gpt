@@ -10,10 +10,10 @@ const ChatExample = () => {
         dispatch(getMessageResponse(query))
     }
     const examples = [
-        "What is Olympics?",
-        "Who won the most medals in the Olympics till date?",
-        "Who is Michael Phelps?",
-        "Write a note about olympics. Mention important dates.",
+        "Who is Neeraj Chopra?",
+        "Who won the gold medal in gymnastics all-around at the 2020 Tokyo Olympics for the women's category?",
+        "What is synchronised swimming?",
+        "Which sport involves performing acrobatic maneuvers on a snowboard or skis and is usually done in a terrain park?",
     ]
     return(
         <Flex flexDirection="column" alignItems="center" justify="center" h="full">
@@ -28,7 +28,7 @@ const ChatExample = () => {
                 <Box>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
-                    border="" m="8" h="5rem" borderRadius="5px" backgroundColor="#1D283D"
+                    border="" m="8" h="8.5rem" borderRadius="5px" backgroundColor="#1D283D"
                     _hover={{cursor: "pointer", backgroundColor: "#0E1525"}}
                     onClick={() => onExampleClick(examples[0])}
                     transition="all 0.2s ease-in-out"
@@ -37,7 +37,7 @@ const ChatExample = () => {
                     </Flex>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
-                    border="" m="8" h="5rem" borderRadius="5px" backgroundColor="#1D283D"
+                    border="" m="8" h="8.5rem" borderRadius="5px" backgroundColor="#1D283D"
                     _hover={{cursor: "pointer", backgroundColor: "#0E1525"}}
                     onClick={() => onExampleClick(examples[1])}
                     transition="all 0.2s ease-in-out"
@@ -49,7 +49,7 @@ const ChatExample = () => {
                 <Box>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
-                    border="" m="8" h="5rem" borderRadius="5px" backgroundColor="#1D283D"
+                    border="" m="8" h="8.5rem" borderRadius="5px" backgroundColor="#1D283D"
                     _hover={{cursor: "pointer", backgroundColor: "#0E1525"}}
                     onClick={() => onExampleClick(examples[2])}
                     transition="all 0.2s ease-in-out"
@@ -58,7 +58,7 @@ const ChatExample = () => {
                     </Flex>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
-                    border="" m="8" h="5rem" borderRadius="5px" backgroundColor="#1D283D"
+                    border="" m="8" h="8.5rem" borderRadius="5px" backgroundColor="#1D283D"
                     _hover={{cursor: "pointer", backgroundColor: "#0E1525"}}
                     onClick={() => onExampleClick(examples[3])}
                     transition="all 0.2s ease-in-out"

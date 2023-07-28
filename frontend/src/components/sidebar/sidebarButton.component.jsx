@@ -21,7 +21,7 @@ const SidebarButton = (props) => {
         {icon && (
           <Icon
             mx="2"
-            boxSize="4"
+            boxSize="6"
             _groupHover={{
               color: "white"
             }}
