@@ -13,7 +13,7 @@ The data for the app is scraped from various sources. The data is scraped using 
 
 These vectors are then used to provide context to the chatbot. The chatbot uses the vectors to find the most similar vector to the user's question and then it generates an answer to the question. The chatbot is built using langchain.js. 
 
-**The tech stack used is as follows:**
+## The tech stack used is as follows:
 #### Frontend
 - React.js
 - Chakra UI
