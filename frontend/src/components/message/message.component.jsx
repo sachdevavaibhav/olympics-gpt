@@ -17,12 +17,12 @@ const Message = ({message, role}) => {
             <Wrap mr="8" alignSelf="start">
                 <WrapItem>
                     {
-                        role==="assistant"? <Avatar bg="#464C63" src={olympicLamp} name="Olympics Gpt"/> :
-                        <Avatar src="" name={user?.username||"VS"}/>
+                        role==="assistant"? <Avatar bg="#464C63" size={{base:"sm", md:"md"}}  src={olympicLamp} name="Olympics Gpt"/> :
+                        <Avatar src="" size={{base:"sm", md:"md"}} name={user?.username||"VS"}/>
                     }
                 </WrapItem>
             </Wrap>
-            <Box w="40%">
+            <Box w={{base:'65%',md: "70%", lg:"40%"}}>
                 <ReactMarkdown>
                     {message}
                 </ReactMarkdown>

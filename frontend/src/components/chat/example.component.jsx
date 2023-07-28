@@ -24,7 +24,7 @@ const ChatExample = () => {
             <Box textAlign="center" mt="5">
                 <Text>Try asking me-</Text>
             </Box>
-            <Flex mt="10">
+            <Flex mt="10" flexDir={{base:"column", lg:"row"}} >
                 <Box>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
@@ -46,7 +46,7 @@ const ChatExample = () => {
                     </Flex>
 
                 </Box>
-                <Box>
+                <Box display={{base:"none", lg:"block"}}>
 
                     <Flex alignItems="center" justify="center" px="3" w="15rem" textAlign="center" 
                     border="" m="8" h="8.5rem" borderRadius="5px" backgroundColor="#1D283D"
@@ -68,7 +68,7 @@ const ChatExample = () => {
 
                 </Box>
             </Flex>
-            <Box mt="10">
+            <Box mt="10" display={{base:"none", md:"block"}}>
                 <Image src={olympicLogo} alt="olympic logo" w="40" />
             </Box>
         </Flex>

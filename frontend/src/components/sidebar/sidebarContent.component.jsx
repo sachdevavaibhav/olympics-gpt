@@ -15,7 +15,6 @@ const SidebarContent = ({ ...props }) => {
     const allChats = useSelector(selectAllChats);
     const isLoading = useSelector(selectAllChatsIsLoading);
     const user = useSelector(selectUser);
-    console.log(user);
     const onClickHandler = () => {
       dispatch(logout());
     }
@@ -26,7 +25,7 @@ const SidebarContent = ({ ...props }) => {
         dispatch(newChat())
     }
     return ( 
-        <Box as="nav" pos="fixed" top="0" left="0" zIndex="sticky" h="full" overflowX="hidden" overflowY="auto" bg="#0E1525" w="60" {...props}>
+        <Box as="nav" top="0" left="0" zIndex="sticky" h="full" overflowX="hidden" overflowY="auto" bg="#0E1525" w="60" {...props}>
             <VStack h="full" w="full" alignItems="center" justify="space-between">
                 <Box w="full">
                     <Flex px="4" py="5" align="center">

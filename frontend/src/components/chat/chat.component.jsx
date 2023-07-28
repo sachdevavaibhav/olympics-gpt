@@ -42,7 +42,7 @@ const Chat = () => {
 
     return(
         <>
-        <Flex align="center" flexDirection="column" h="100%" overflowY="auto" flex="1" mb="2" ref={chatContainerRef}>
+        <Flex align="center" flexDirection="column" h="100%" overflowY="auto" overflowX="hidden" flex="1" mb="2" ref={chatContainerRef}>
             {
                 messages.length <= 0 ? <ChatExample /> : messages.map((message, index) => {
                     return(

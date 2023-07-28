@@ -22,9 +22,9 @@ const ChatInput = () => {
     }
     return (
         <Flex as="form" alignItems="center" justify="center" flexDir="column" mt="" w="full" pb="2">
-            <InputGroup w="50%">
+            <InputGroup w={{base: "95%", lg:"60%"}}>
                 <Input
-                    p='1.8rem'
+                    p={{base:"1.2rem", md:"1.8rem"}}
                     type='text'
                     placeholder='Ask me anything about Olympics'
                     onChange={handleChange}
@@ -36,7 +36,7 @@ const ChatInput = () => {
                     _hover={{borderColor: "#0E1525"}}
                     isDisabled={isLoading}
                 />
-                <InputRightElement width='5rem' height="100%">
+                <InputRightElement width={{base:"3rem", md:"5rem"}} height="100%">
                         <Button 
                         h='1.75rem' 
                         size='sm' 
@@ -52,9 +52,6 @@ const ChatInput = () => {
                         </Button>
                 </InputRightElement>
             </InputGroup>
-            <Box mt="3">
-                <Text color="#fff" fontSize="sm">Developed with love by Vaibhav</Text>
-            </Box>
         </Flex>
     )
 }

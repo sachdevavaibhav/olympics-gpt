@@ -22,13 +22,14 @@ const SidebarButton = (props) => {
           <Icon
             mx="2"
             boxSize="6"
+            color="white"
             _groupHover={{
               color: "white"
             }}
             as={icon}
           />
         )}
-        <Text style={{whiteSpace: "nowrap", textOverflow: "ellipsis"}} overflow="hidden" id={props.id}>
+        <Text style={{whiteSpace: "nowrap", textOverflow: "ellipsis"}} overflow="hidden" id={props.id} color="white">
           {children}
         </Text>
       </Flex>
