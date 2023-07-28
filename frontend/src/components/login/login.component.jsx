@@ -64,15 +64,13 @@ const Login = () => {
                     <Heading size="lg">Login to continue</Heading>
                 </Box>
                 <Box bgColor="#1D283D" p="10" borderRadius="1rem" boxShadow="0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)">
-                    <Box mb="3">
+                    <Box mb="4">
                         <FormLabel>Email address</FormLabel>
                         <Input id="loginInput" type='email' name='email' onChange={handleChange} />
-                        <FormHelperText color="#84A7A1">We'll never share your email.</FormHelperText>
                     </Box>
-                    <Box mb="3">
+                    <Box mb="4">
                         <FormLabel>Password</FormLabel>
                         <Input type='password' name='password' onChange={handleChange} />
-                        <FormHelperText color="#84A7A1">We'll never share your password.</FormHelperText>
                     </Box>
                     <Button mb="3" backgroundColor="#3AA6B9" color="white" type="submit" _hover={{backgroundColor: "#3AA6B9", opacity: "0.8"}}>Login</Button>
                     <Box>
