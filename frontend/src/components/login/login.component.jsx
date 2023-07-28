@@ -1,4 +1,4 @@
-import {FormControl, FormLabel, FormHelperText, Input,Spinner ,Box, Heading, Button, Text} from '@chakra-ui/react'
+import {FormControl, FormLabel, FormHelperText, Input,Box, Heading, Button, Text} from '@chakra-ui/react'
 import {useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {login} from '../../store/user/user.reducer.js'
@@ -6,6 +6,7 @@ import {selectUser, selectUserError, selectIsLoading, selectSuccess} from '../..
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
+import Loader from '../loader/loader.component.jsx'
 
 const Login = () => {
     const [formData, setFormData] = useState({})
@@ -57,7 +58,7 @@ const Login = () => {
 
     return (
         <>
-        {isLoading? <Spinner /> : 
+        {isLoading? <Loader /> : 
             <FormControl id="login" as="form" display="flex" flexDir="column" justifyContent="center" alignItems="center" onSubmit={handleSubmit}>
                 <Box mb="5">
                     <Heading size="lg">Login to continue</Heading>

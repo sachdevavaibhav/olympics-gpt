@@ -1,4 +1,4 @@
-import {FormControl, FormLabel, FormHelperText, Input,Spinner, Box, Heading, Button, Text} from '@chakra-ui/react'
+import {FormControl, FormLabel, FormHelperText, Input, Box, Heading, Button, Text} from '@chakra-ui/react'
 import {useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {register} from '../../store/user/user.reducer.js'
@@ -6,6 +6,7 @@ import {selectUser, selectUserError, selectIsLoading, selectSuccess} from '../..
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react'
+import Loader from '../loader/loader.component.jsx'
 
 const SignUp = () => {
     const [formData, setFormData] = useState({})
@@ -56,9 +57,9 @@ const SignUp = () => {
     }, [registerError, registerSuccess])
     
     return (
-        // if isLoading is true, show loading spinner
+        // if isLoading is true, show loading animation
         <>
-            {isLoading ? <Spinner size="xl" color="white" /> :            
+            {isLoading ? <Loader/> :            
                 <FormControl id="signup" as="form" display="flex" flexDir="column" justifyContent="center" alignItems="center" onSubmit={handleSubmit}>
                     <Box mb="5">
                         <Heading size="lg">Create your account</Heading>

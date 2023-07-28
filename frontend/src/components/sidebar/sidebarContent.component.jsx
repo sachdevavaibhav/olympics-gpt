@@ -1,5 +1,6 @@
 import { Box,VStack,Flex, Icon, Text, Spinner } from "@chakra-ui/react"
 import { RiFlashlightFill } from 'react-icons/ri';
+import olympicLamp from '../../assets/torch.svg';
 import {CgLogOut} from 'react-icons/cg'
 import {PiChatDotsFill, PiPlusCircleFill} from 'react-icons/pi'
 import SidebarButton from "./sidebarButton.component";
@@ -27,9 +28,9 @@ const SidebarContent = ({ ...props }) => {
             <VStack h="full" w="full" alignItems="center" justify="space-between">
                 <Box w="full">
                     <Flex px="4" py="5" align="center">
-                        <Icon as={RiFlashlightFill} h={8} w={8} />
+                        <img src={olympicLamp} alt="Olympic Lamp" width="40" height="40"/>
                         <Text fontSize="2xl" ml="2" color="white" fontWeight="semibold"> 
-                            OlympicGPT
+                            OlympicsGPT
                         </Text>
                     </Flex>
                 </Box>

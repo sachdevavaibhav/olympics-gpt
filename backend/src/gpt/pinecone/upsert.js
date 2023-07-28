@@ -6,7 +6,7 @@ dotenv.config()
 
 // const olympicsDoc = await loadPdf("../medalOlympics.pdf")
 // const olmypicsDocChunks = await splitDocs(olympicsDoc)
-const olympicsDoc = await loadText("./src/gpt/athlete.txt")
+const olympicsDoc = await loadText("./src/gpt/sports.txt")
 const olmypicsDocChunks = await splitDocs(olympicsDoc)
 // console.log(olmypicsDocChunks)
 
