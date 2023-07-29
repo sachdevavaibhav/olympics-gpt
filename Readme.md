@@ -27,7 +27,7 @@ These vectors are then used to provide context to the chatbot. The chatbot uses 
 - Langchain.js
 
 ## Demo
-Demo video can be found at [https://youtu.be/2X6Z3Z3X8Zc](https://youtu.be/2X6Z3Z3X8Zc)
+Demo video can be found at [https://youtu.be/g2JIgqPMrlI](https://youtu.be/g2JIgqPMrlI)
 
 ## About the repository
 The repository contains the code for the frontend and the backend of the app. The frontend is built using React.js and Chakra UI. The backend is built using Node.js and Express.js. The backend is hosted on Render and the frontend is hosted on Netlify. The data folder contains the script to scrape data about olympics from various sources.
