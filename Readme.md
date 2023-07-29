@@ -29,6 +29,8 @@ These vectors are then used to provide context to the chatbot. The chatbot uses 
 ## Demo
 Demo video can be found at [https://youtu.be/g2JIgqPMrlI](https://youtu.be/g2JIgqPMrlI)
 
+[![Video](https://img.youtube.com/vi/g2JIgqPMrlI/hqdefault.jpg)](https://www.youtube.com/watch?v=g2JIgqPMrlI)
+
 ## About the repository
 The repository contains the code for the frontend and the backend of the app. The frontend is built using React.js and Chakra UI. The backend is built using Node.js and Express.js. The backend is hosted on Render and the frontend is hosted on Netlify. The data folder contains the script to scrape data about olympics from various sources.
 
