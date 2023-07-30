@@ -1,5 +1,5 @@
 # OlympicsGPT
-An AI based web app that generates answers to questions related to the Olympics. The app is built powered by Open AI's GPT-3.5 model. It is built using langchain.js and React.js. This app can help users to get answers to their questions about the Olympics. The app can be used by sports enthusiasts, journalists, and anyone who wants to know more about the Olympics. **This can help enhance the olympics experience and increase fan engagement.**
+An AI based web app that generates answers to questions related to the Olympics. The app is powered by Open AI's GPT-3.5 model. It is built using langchain.js and React.js. This app can help users to get answers to their questions about the Olympics. It can be used by sports enthusiasts, journalists, and anyone who wants to know more about the Olympics. **This can help enhance the olympics experience and increase fan engagement.**
 
 The chatbot remembers the context of the conversation and users can switch between their chats with the chatbot. The chat history is stored in the firestore database. 
 
