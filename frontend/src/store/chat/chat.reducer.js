@@ -15,13 +15,12 @@ const getMessageResponse = createAsyncThunk("chat/getMessageResponse", async (qu
     try {
         const chatId = getState().chat.chatId
         const response = await axiosInstance.post('/chat/query', { query, chatId })
-        console.log(response)
         return response.data.response.data
     }
     catch (error) {
         return rejectWithValue(error.response.data.response)
     }
-    
+
 })
 
 const getAllChats = createAsyncThunk("chat/all", async (_, {rejectWithValue}) => {
@@ -39,7 +38,6 @@ const getAllChats = createAsyncThunk("chat/all", async (_, {rejectWithValue}) =>
 
 const getChatHistory = createAsyncThunk("chat/history", async (chatId, {rejectWithValue, getState}) => {
     const currentChatId = getState().chat.chatId
-    console.log(currentChatId)
     if (currentChatId === chatId) return
     try {
         const response = await axiosInstance.get(`/chat/history/${chatId}`)
@@ -122,4 +120,4 @@ const chatSlice = createSlice({
 
 export const { addMessage, newChat } = chatSlice.actions
 export { getMessageResponse, getAllChats, getChatHistory }
-export const chatReducer = chatSlice.reducer    
+export const chatReducer = chatSlice.reducer

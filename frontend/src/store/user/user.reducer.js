@@ -10,7 +10,7 @@ const initialState = {
 
 const login = createAsyncThunk("user/login", async ({email, password}, {rejectWithValue}) => {
     try {
-        const response = await axiosInstance.post('/auth/login', { email, password })    
+        const response = await axiosInstance.post('/auth/login', { email, password })
         return response.data.response.data
     }
     catch (error) {
@@ -20,7 +20,7 @@ const login = createAsyncThunk("user/login", async ({email, password}, {rejectWi
 
 const register = createAsyncThunk("user/signup", async ({email, password}, {rejectWithValue}) => {
     try {
-        const response = await axiosInstance.post('/auth/signup', { email, password })    
+        const response = await axiosInstance.post('/auth/signup', { email, password })
         return response.data.response.data.user
     }
     catch (error) {
@@ -30,7 +30,7 @@ const register = createAsyncThunk("user/signup", async ({email, password}, {reje
 
 const getUser = createAsyncThunk("user/getUser", async ({token} ,{rejectWithValue}) => {
     try {
-        const response = await axiosInstance.post(`/auth/getUser`, {token})  
+        const response = await axiosInstance.post(`/auth/getUser`, {token})
         return response.data.response.data.user
     }
     catch (error) {
@@ -67,7 +67,6 @@ const userSlice = createSlice({
             state.error = null
         })
         builder.addCase(login.rejected, (state, action) => {
-            console.log(action)
             state.error = action.payload
             state.isLoading = false
         })
@@ -83,11 +82,10 @@ const userSlice = createSlice({
             state.error = null
         })
         builder.addCase(register.rejected, (state, action) => {
-            console.log("from signup", action)
             state.error = action.payload
             state.isLoading = false
         })
-        
+
         builder.addCase(getUser.pending, (state) => {
             state.isLoading = true
             state.success = false

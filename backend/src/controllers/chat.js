@@ -21,11 +21,9 @@ export const mapToMemory = (messages) => {
 export const queryModel = async (chain, query, chatId) => {
   const recentMessages = await getRecentChatHistory(chatId, 6)
   const memoryMessages = mapToMemory(recentMessages)
-  console.log(memoryMessages)
   const response = await chain.call(
     { question: query, chat_history: memoryMessages }
   );
-  console.log(response);
   return {role:"assistant", text: response.text};
 }
 

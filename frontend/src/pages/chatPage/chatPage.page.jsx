@@ -12,21 +12,15 @@ const ChatPage = () => {
     const allChats = useSelector(selectAllChats);
 
     useEffect(() => {
-        console.log("effect all chats fired");
         dispatch(getAllChats());
     }, []);
-
-    // useEffect(() => {
-    //     console.log("effect all chats fired");
-    //     dispatch(getAllChats());
-    // }, [allChats]);
 
     return (
         <>
         <Flex flexDir={{base:"column", md:"row"}} justify="center" h="full" w="full">
             <SideBar />
             <Flex flexDir="column" justify="space-between" w="full" height="full" flex="1" overflowY="hidden">
-                <Chat />    
+                <Chat />
                 <ChatInput />
             </Flex>
         </Flex>

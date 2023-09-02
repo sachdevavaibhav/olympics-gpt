@@ -40,7 +40,7 @@ router.post('/message',checkAuth ,async (req, res) => {
 
 router.post('/query',checkAuth ,async (req, res) => {
     try {
-        let {query, chatId} = req.body; 
+        let {query, chatId} = req.body;
         if (!query) {
             res.status(403);
             throw new Error("No query provided");
@@ -59,7 +59,6 @@ router.post('/query',checkAuth ,async (req, res) => {
             await createChat(userId, chatId, message)
         }
         const queryRes = await queryModel(chain, query, chatId)
-        console.log("Response",queryRes)
         if (isFirstMessage) {
             await updateChatHistory(chatId, queryRes)
         }
