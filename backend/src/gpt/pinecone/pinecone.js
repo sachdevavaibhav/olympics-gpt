@@ -41,6 +41,7 @@ export const splitDocs = async (docs, chunkSize = 1000, chunkOverlap = 200) => {
 export const initialisePineconeClient = async () => {
   try {
     const pineconeClient = new Pinecone({
+      fetchApi: fetch,
       apiKey: config.PINECONE_API_KEY,
     });
 
