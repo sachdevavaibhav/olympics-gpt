@@ -18,7 +18,7 @@ app.use(cors())
 
 // initialise pinecone client
 const pineconeClient = await initialisePineconeClient();
-console.log(pineconeClient)
+
 export const chain = await createQueryChain(pineconeClient, 1, false);
 
 // routes
