@@ -1,17 +1,16 @@
 import express from 'express'
-import dotenv from 'dotenv'
 import { generateResponse } from './utils/generateResponse.js'
 import { initialisePineconeClient } from './gpt/index.js'
-import {createQueryChain } from './gpt/index.js'
+import { createQueryChain } from './gpt/index.js'
 import cors from 'cors'
 import healthCheckRoutes from './routes/healthcheck.js'
 import chatRoutes from './routes/chat.js'
 import authRoutes from './routes/auth.js'
-dotenv.config()
+import { config } from './config.js'
 
 const app = express()
 
-const PORT = process.env.PORT || 5000
+const PORT = config.PORT || 5000
 
 // middleware
 app.use(express.json())
@@ -19,6 +18,7 @@ app.use(cors())
 
 // initialise pinecone client
 const pineconeClient = await initialisePineconeClient();
+console.log(pineconeClient)
 export const chain = await createQueryChain(pineconeClient, 1, false);
 
 // routes
@@ -36,8 +36,8 @@ app.use((req, res, next) => {
 // Handle all errors
 app.use((error, req, res, next) => {
     res.status(res.statusCode || 500)
-    res.json(generateResponse(req, res, {message: error.message}))
-  })
+    res.json(generateResponse(req, res, { message: error.message }))
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)

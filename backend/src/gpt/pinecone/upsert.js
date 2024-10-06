@@ -1,8 +1,7 @@
 import { OpenAIEmbeddings } from "langchain/embeddings/openai"
 import { PineconeStore } from "langchain/vectorstores/pinecone"
-import { loadPdf, loadText,splitDocs, initialisePineconeClient } from "../index.js"
-import dotenv from "dotenv"
-dotenv.config()
+import { loadPdf, loadText, splitDocs, initialisePineconeClient } from "../index.js"
+import { config } from "../../config.js"
 
 console.log("Starting upsert")
 // const olympicsDoc = await loadPdf("../medalOlympics.pdf")
@@ -12,7 +11,7 @@ const olmypicsDocChunks = await splitDocs(olympicsDoc)
 // console.log(olmypicsDocChunks)
 
 const pineconeClient = await initialisePineconeClient()
-const pineconeIndex = pineconeClient.Index(process.env.PINECONE_INDEX)
+const pineconeIndex = pineconeClient.Index(config.PINECONE_INDEX)
 const embeddings = new OpenAIEmbeddings()
-await PineconeStore.fromDocuments(olmypicsDocChunks, embeddings, {pineconeIndex})
+await PineconeStore.fromDocuments(olmypicsDocChunks, embeddings, { pineconeIndex })
 console.log("Upsert complete")

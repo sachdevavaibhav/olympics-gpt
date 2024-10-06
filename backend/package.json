@@ -22,5 +22,8 @@
     "langchain": "^0.0.109",
     "pdf-parse": "^1.1.1",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

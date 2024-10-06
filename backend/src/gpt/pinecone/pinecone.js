@@ -2,8 +2,7 @@ import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { TextLoader } from "langchain/document_loaders/fs/text";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { Pinecone } from "@pinecone-database/pinecone";
-import dotenv from "dotenv";
-dotenv.config();
+import { config } from "../../config.js";
 
 export const loadPdf = async (path, splitPages = true) => {
   try {
@@ -42,7 +41,7 @@ export const splitDocs = async (docs, chunkSize = 1000, chunkOverlap = 200) => {
 export const initialisePineconeClient = async () => {
   try {
     const pineconeClient = new Pinecone({
-      apiKey: process.env.PINECONE_API_KEY,
+      apiKey: config.PINECONE_API_KEY,
     });
 
     return pineconeClient;
