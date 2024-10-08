@@ -1,5 +1,5 @@
 import { db } from "../utils/firebase/firebase.js";
-import { AIMessage, HumanMessage } from "langchain/schema";
+import { AIMessage, HumanMessage } from "@langchain/core/messages";
 
 export const mapToMemory = (messages) => {
   if (!messages) {
@@ -21,10 +21,11 @@ export const mapToMemory = (messages) => {
 export const queryModel = async (chain, query, chatId) => {
   const recentMessages = await getRecentChatHistory(chatId, 6)
   const memoryMessages = mapToMemory(recentMessages)
-  const response = await chain.call(
-    { question: query, chat_history: memoryMessages }
+  const response = await chain.invoke(
+    { input: query, chat_history: memoryMessages }
   );
-  return {role:"assistant", text: response.text};
+  const answer = response.answer || "I don't know the answer to that question"
+  return { role: "assistant", text: answer };
 }
 
 export const createChat = async (userId, chatId, message) => {
@@ -40,7 +41,7 @@ export const createChat = async (userId, chatId, message) => {
     createdAt: new Date(),
   })
   await messageRef.set(message)
-  return {chatId, title: message.text}
+  return { chatId, title: message.text }
 }
 
 export const getChatHistory = async (chatId) => {
@@ -49,10 +50,10 @@ export const getChatHistory = async (chatId) => {
   const messagesRef = await chatRef.collection("messages").orderBy("createdAt").get()
   const messages = []
   messagesRef.forEach((message) => {
-    const {role, text} = message.data()
-    messages.push({role, text})
+    const { role, text } = message.data()
+    messages.push({ role, text })
   })
-  return {chatId, messages}
+  return { chatId, messages }
 }
 
 export const getRecentChatHistory = async (chatId, k) => {
@@ -61,8 +62,8 @@ export const getRecentChatHistory = async (chatId, k) => {
   const messagesRef = await chatRef.collection("messages").orderBy("createdAt", "desc").limit(k).get()
   const messages = []
   messagesRef.forEach((message) => {
-    const {role, text} = message.data()
-    messages.push({role, text})
+    const { role, text } = message.data()
+    messages.push({ role, text })
   })
   return messages.reverse()
 }

@@ -3,12 +3,12 @@ const router = express.Router();
 import { generateResponse } from '../utils/generateResponse.js';
 import { createChat, queryModel, updateChatHistory, getAllUserChats, getChatHistory, getRecentChatHistory } from '../controllers/chat.js';
 import { chain } from '../index.js';
-import {checkAuth} from '../middleware/checkAuth.js';
-import {v4 as uuidv4} from 'uuid';
+import { checkAuth } from '../middleware/checkAuth.js';
+import { v4 as uuidv4 } from 'uuid';
 
-router.post('/create',checkAuth ,async (req, res) => {
+router.post('/create', checkAuth, async (req, res) => {
     try {
-        const {message} = req.body;
+        const { message } = req.body;
         const userId = req.userData.userId;
         const chatId = uuidv4();
         if (!userId || !chatId || !message) {
@@ -23,9 +23,9 @@ router.post('/create',checkAuth ,async (req, res) => {
     }
 })
 
-router.post('/message',checkAuth ,async (req, res) => {
+router.post('/message', checkAuth, async (req, res) => {
     try {
-        const {message, chatId} = req.body;
+        const { message, chatId } = req.body;
         if (!chatId || !message) {
             res.status(403);
             throw new Error("Missing required parameters");
@@ -38,16 +38,16 @@ router.post('/message',checkAuth ,async (req, res) => {
     }
 })
 
-router.post('/query',checkAuth ,async (req, res) => {
+router.post('/query', checkAuth, async (req, res) => {
     try {
-        let {query, chatId} = req.body;
+        let { query, chatId } = req.body;
         if (!query) {
             res.status(403);
             throw new Error("No query provided");
         }
         // if not chatId, create new chat
         let isFirstMessage = false;
-        const message = {role:"user", text: query}
+        const message = { role: "user", text: query }
         if (!chatId) {
             const userId = req.userData.userId;
             chatId = uuidv4();
@@ -68,12 +68,13 @@ router.post('/query',checkAuth ,async (req, res) => {
         }
         res.status(200).json(generateResponse(req, res, { queryRes, chatId }))
     } catch (error) {
+        console.log(error)
         const statusCode = res.statusCode || 500;
         res.status(statusCode).json(generateResponse(req, res, { message: error.message }))
     }
 })
 
-router.get('/all',checkAuth ,async (req, res) => {
+router.get('/all', checkAuth, async (req, res) => {
     try {
         const userId = req.userData.userId;
         if (!userId) {
@@ -88,9 +89,9 @@ router.get('/all',checkAuth ,async (req, res) => {
     }
 })
 
-router.get('/history/:chatid',checkAuth ,async (req, res) => {
+router.get('/history/:chatid', checkAuth, async (req, res) => {
     try {
-        const {chatid} = req.params;
+        const { chatid } = req.params;
         if (!chatid) {
             res.status(403);
             throw new Error("No chat id provided");
@@ -103,9 +104,9 @@ router.get('/history/:chatid',checkAuth ,async (req, res) => {
     }
 })
 
-router.get('/recent/:chatid',checkAuth ,async (req, res) => {
+router.get('/recent/:chatid', checkAuth, async (req, res) => {
     try {
-        const {chatid} = req.params;
+        const { chatid } = req.params;
         if (!chatid) {
             res.status(403);
             throw new Error("No chat id provided");
