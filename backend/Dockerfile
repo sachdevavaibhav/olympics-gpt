@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm ci --only=production
 COPY . .
 
 # Production image
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Install curl for healthcheck
 RUN apk --no-cache add curl

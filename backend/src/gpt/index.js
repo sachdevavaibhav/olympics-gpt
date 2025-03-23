@@ -1,25 +1,17 @@
-import { loadPdf, loadText ,splitDocs,initialisePineconeClient } from "./pinecone/pinecone.js";
-import { createQueryChain } from "./pinecone/chain.js";
+import { loadPdf, loadText, splitDocs, getOrCreateCollection } from "./chroma/chroma.js";
+import { createQueryChain } from "./chroma/chain.js";
+import { upsertDocuments, upsertTextFile, upsertPdfFile } from "./chroma/upsert.js";
 
-export {loadPdf};
-export {loadText};
-export {splitDocs};
-export {initialisePineconeClient};
-
-export {createQueryChain};
-
-
-
-
-
-
-
-
-
-
-
-
-
+export {
+    loadPdf,
+    loadText,
+    splitDocs,
+    getOrCreateCollection,
+    createQueryChain,
+    upsertDocuments,
+    upsertTextFile,
+    upsertPdfFile
+};
 
 /*
 TODO:

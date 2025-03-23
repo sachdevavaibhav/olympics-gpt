@@ -48,12 +48,12 @@ export const splitDocs = async (docs, chunkSize = 1000, chunkOverlap = 200) => {
 export const initialiseChromaClient = async (collectionName = "olympics") => {
   try {
     const embeddings = new OpenAIEmbeddings({
-      openAIApiKey: config.OPENAI_API_KEY,
+      apiKey: config.OPENAI_API_KEY
     });
 
     // Connect to ChromaDB using the URL from docker-compose
     const vectorStore = new Chroma(embeddings, {
-      url: "http://localhost:8000",
+      url: config.CHROMA_DB_URL,
       collectionName: collectionName,
     });
 

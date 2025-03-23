@@ -1,7 +1,7 @@
 import express from 'express'
 import { generateResponse } from './utils/generateResponse.js'
-import { initialisePineconeClient } from './gpt/index.js'
-import { createQueryChain } from './gpt/index.js'
+import { getOrCreateCollection } from './gpt/chroma/chroma.js'
+import { createQueryChain } from './gpt/chroma/chain.js'
 import cors from 'cors'
 import healthCheckRoutes from './routes/healthcheck.js'
 import chatRoutes from './routes/chat.js'
@@ -16,10 +16,8 @@ const PORT = config.PORT || 5000
 app.use(express.json())
 app.use(cors())
 
-// initialise pinecone client
-const pineconeClient = await initialisePineconeClient();
-
-export const chain = await createQueryChain(pineconeClient, 1, false);
+// Initialize ChromaDB client and create chain
+export const chain = await createQueryChain(1);
 
 // routes
 app.use('/api/healthcheck', healthCheckRoutes)
